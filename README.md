@@ -4,12 +4,12 @@
 
 A modern, Tinder-style task management app with swipe gestures for effortless task triage.
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.1-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-6.0-2D3748?logo=prisma)](https://www.prisma.io/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
-[Demo](#) • [Features](#features) • [Getting Started](#getting-started) • [Documentation](TESTING.md)
+[Features](#features) • [Getting Started](#getting-started) • [Development](DEVELOPMENT.md) • [Deployment](DEPLOYMENT.md) • [Testing](TESTING.md)
 
 </div>
 
@@ -81,9 +81,8 @@ cd taskswipe
 
 2. **Install dependencies:**
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
-*Note: Use `--legacy-peer-deps` due to Next.js 16/NextAuth v5 compatibility*
 
 3. **Set up environment variables:**
 ```bash
