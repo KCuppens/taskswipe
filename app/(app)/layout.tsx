@@ -52,7 +52,7 @@ export default async function AppLayout({
             <form
               action={async () => {
                 "use server"
-                await signOut()
+                await signOut({ redirectTo: "/login" })
               }}
             >
               <Button variant="ghost" size="sm" type="submit">
@@ -73,7 +73,7 @@ export default async function AppLayout({
           <form
             action={async () => {
               "use server"
-              await signOut()
+              await signOut({ redirectTo: "/login" })
             }}
           >
             <Button variant="ghost" size="sm" type="submit">
