@@ -12,7 +12,13 @@ export interface Task {
   status: string
   priority?: string | null
   deadline?: Date | string | null
+  completedAt?: Date | string | null
   recurring?: string | null
+  recurData?: any
+  position?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userId?: string
 }
 
 interface TaskCardProps {
