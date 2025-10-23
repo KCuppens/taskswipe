@@ -1,7 +1,7 @@
-import { auth } from "@/lib/auth"
+import { authEdge } from "@/lib/auth.edge"
 import { NextResponse } from "next/server"
 
-export default auth((req) => {
+export default authEdge((req) => {
   const isAuth = !!req.auth
   const isAuthPage = req.nextUrl.pathname.startsWith("/login") || req.nextUrl.pathname.startsWith("/signup")
 
