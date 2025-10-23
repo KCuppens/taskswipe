@@ -203,15 +203,17 @@ export default function TriagePage() {
       const data = await response.json()
 
       if (response.ok) {
-        alert(`Successfully added ${data.count} test tasks!`)
+        alert(`✅ Successfully added ${data.count} test tasks!`)
         // Refresh task list
         fetchTasks()
+      } else if (response.status === 401) {
+        alert("⚠️ Not authenticated. Please log in first.\n\nNote: If you're on Vercel, make sure to set NEXTAUTH_SECRET in environment variables.")
       } else {
-        alert(data.error || "Failed to seed tasks")
+        alert(`❌ Error: ${data.error || "Failed to seed tasks"}`)
       }
     } catch (error) {
       console.error("Failed to seed tasks:", error)
-      alert("Failed to seed tasks. Please try again.")
+      alert("❌ Network error. Please check your connection and try again.")
     } finally {
       setIsSeeding(false)
     }
