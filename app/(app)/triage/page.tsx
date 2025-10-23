@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Plus } from "lucide-react"
+import { Plus, Sparkles } from "lucide-react"
 import { Toast } from "@/components/ui/toast"
 
 export default function TriagePage() {
@@ -25,6 +25,7 @@ export default function TriagePage() {
   const [newTaskTitle, setNewTaskTitle] = useState("")
   const [newTaskDescription, setNewTaskDescription] = useState("")
   const [isCreating, setIsCreating] = useState(false)
+  const [isSeeding, setIsSeeding] = useState(false)
   const [undoStack, setUndoStack] = useState<Array<{ task: Task; previousStatus: string }>>([])
   const [showUndo, setShowUndo] = useState(false)
 
@@ -187,6 +188,35 @@ export default function TriagePage() {
     }
   }
 
+  const handleSeedTasks = async () => {
+    if (!confirm("This will add 50 test tasks to your inbox. Continue?")) {
+      return
+    }
+
+    setIsSeeding(true)
+
+    try {
+      const response = await fetch("/api/seed", {
+        method: "POST",
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        alert(`Successfully added ${data.count} test tasks!`)
+        // Refresh task list
+        fetchTasks()
+      } else {
+        alert(data.error || "Failed to seed tasks")
+      }
+    } catch (error) {
+      console.error("Failed to seed tasks:", error)
+      alert("Failed to seed tasks. Please try again.")
+    } finally {
+      setIsSeeding(false)
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -203,10 +233,20 @@ export default function TriagePage() {
             <h1 className="text-4xl font-bold">Task Triage</h1>
             <p className="text-muted-foreground">Swipe to organize your tasks</p>
           </div>
-          <Button onClick={() => setShowAddTask(true)}>
-            <Plus className="mr-2 h-4 w-4" />
-            Add Task
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              onClick={handleSeedTasks}
+              disabled={isSeeding}
+            >
+              <Sparkles className="mr-2 h-4 w-4" />
+              {isSeeding ? "Loading..." : "Load Test Tasks"}
+            </Button>
+            <Button onClick={() => setShowAddTask(true)}>
+              <Plus className="mr-2 h-4 w-4" />
+              Add Task
+            </Button>
+          </div>
         </div>
 
         <div className="rounded-lg border bg-card p-8">
